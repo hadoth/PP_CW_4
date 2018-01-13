@@ -1,28 +1,31 @@
 package zad3.semaphore;
 
-import java.util.Date;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
 
 public class Consumer implements Runnable {
-    private LinkedBlockingQueue<Integer> queue;
-    private AtomicInteger value;
-    private long interval;
+    private Queue<Integer> queue;
+    private Semaphore addPermits;
+    private Semaphore takePermits;
+    private String message;
 
-    public Consumer(LinkedBlockingQueue<Integer> queue, long interval) {
+    public Consumer(Queue<Integer> queue, Semaphore addPermits, Semaphore takePermits, String message) {
         this.queue = queue;
-        this.value = new AtomicInteger(0);
-        this.interval = interval;
+        this.message = " " + message;
+        this.addPermits = addPermits;
+        this.takePermits = takePermits;
     }
 
     @Override
     public void run() {
-        long now = new Date().getTime() + this.interval;
-        while (new Date().getTime() < now) {
+        boolean run = true;
+        while (run) {
             try {
-                System.out.println(this.queue.take());
+                this.takePermits.acquire();
+                System.out.println(this.queue.remove() + message);
+                this.addPermits.release();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                run = false;
             }
         }
     }
