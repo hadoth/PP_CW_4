@@ -1,7 +1,7 @@
 package zad1;
-//import zad1.banksystem.Experiment;
+import zad1.banksystem.Experiment;
 //import zad1.banksystemsynchblock.Experiment;
-import zad1.banksystemsynchronized.Experiment;
+//import zad1.banksystemsynchronized.Experiment;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -13,7 +13,7 @@ public class Main {
 
         System.out.println("AccountBalance: " + experiment.getBalance());
         experiment.run();
-        Thread.sleep(transferCount);
+        Thread.sleep(transferCount/5);
         System.out.println("AccountBalance: " + experiment.getBalance());
     }
 }

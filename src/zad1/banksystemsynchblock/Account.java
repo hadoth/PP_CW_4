@@ -7,12 +7,12 @@ public class Account {
         this.balance = 100;
     }
 
-    public int transferIn(int value) {
+    public synchronized int transferIn(int value) {
         this.balance += value;
         return this.balance;
     }
 
-    public int transferOut(int value) {
+    public synchronized int transferOut(int value) {
         this.balance -= value;
         return this.balance;
     }

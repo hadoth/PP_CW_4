@@ -35,13 +35,7 @@ public class Bank {
         if (toAccountId >= this.accounts.size() || toAccountId < 0) {
             throw new IllegalArgumentException("Invalid account ID" + toAccountId);
         }
-        Account fromAccount = this.accounts.get(fromAccountId);
-        Account toAccount = this.accounts.get(toAccountId);
-        synchronized (fromAccount) {
-            synchronized (toAccount) {
-                fromAccount.transferOut(amount);
-                toAccount.transferIn(amount);
-            }
-        }
+        this.accounts.get(fromAccountId).transferOut(amount);
+        this.accounts.get(toAccountId).transferIn(amount);
     }
 }

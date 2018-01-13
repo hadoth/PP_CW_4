@@ -1,5 +1,6 @@
 package zad2;
 
+//import zad2.waitnotify.Experiment;
 import zad2.awaitsignal.Experiment;
 
 public class Main {
